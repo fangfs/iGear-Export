@@ -45,7 +45,9 @@ namespace iGear_Export
         static Boolean exTract()
         {
             //take the date and time - and do it for the previous hour
-            DateTime dteStart = DateTime.Now.AddHours(Properties.Settings.Default.intHours*-1);
+            //DateTime dteStart = DateTime.Now.AddHours(Properties.Settings.Default.intHours*-1);
+            //set strat time to this time yesterday. R1266554 Ver1.0.0.1
+            DateTime dteStart = DateTime.Now.AddDays(-1);
             DateTime dteStop = DateTime.Now;
 
             //read through each record - if it is not transID=1 then update processed to 2

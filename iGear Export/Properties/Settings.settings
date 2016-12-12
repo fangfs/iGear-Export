@@ -14,7 +14,7 @@
       <Value Profile="(Default)">Data Source=ukbirmdb01;Initial Catalog=DockAudit;Persist Security Info=True;User ID=sa;Password=Win@2K12</Value>
     </Setting>
     <Setting Name="streamPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">H:\SAP PROJECT\iGear\</Value>
+      <Value Profile="(Default)">H:\iGear\</Value>
     </Setting>
   </Settings>
 </SettingsFile>

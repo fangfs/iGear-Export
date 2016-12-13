@@ -45,7 +45,7 @@ namespace iGear_Export.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("H:\\iGear\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\\\\traukbirmfs01\\all\\iGear\\")]
         public string streamPath {
             get {
                 return ((string)(this["streamPath"]));

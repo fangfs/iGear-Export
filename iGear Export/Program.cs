@@ -31,13 +31,8 @@ namespace iGear_Export
 
             if (actTest == true)
             {
-                //ok first part passed - do the next
-                EventLog.WriteEntry(sSource, "Done", EventLogEntryType.Information);
-            }
-            else
-            {
-                //do nothing the first part failed.
-                EventLog.WriteEntry(sSource, "Not done", EventLogEntryType.Warning);
+                //ok extract weas succesfull
+                EventLog.WriteEntry(sSource, "Done", EventLogEntryType.Information, 101);
             }
 
         }
@@ -49,6 +44,7 @@ namespace iGear_Export
             //set strat time to this time yesterday. R1266554 Ver1.0.0.1
             DateTime dteStart = DateTime.Now.AddDays(-1);
             DateTime dteStop = DateTime.Now;
+            string filename = "Day";
 
             //read through each record - if it is not transID=1 then update processed to 2
             //open database read to write to
@@ -73,8 +69,8 @@ namespace iGear_Export
 
                 if(reader.HasRows)
                 {
-                    string streamFile = dteStart.ToString("yyyyMMddHHmmss");
-                    using (StreamWriter sw = new StreamWriter(Properties.Settings.Default.streamPath + streamFile + ".txt"))
+                    string streamFile = dteStart.ToString("yyyyMMdd");
+                    using (StreamWriter sw = new StreamWriter(Properties.Settings.Default.streamPath + filename + streamFile + ".txt"))
                     {
                         //write header
                         sw.WriteLine("Production Date\tMAT_NUM\tOLD_MAT_REF\tPLANT\tSLOC\tBATCH_NUM\tHU_NUM\tSERIAL\tscantimestamp\tWO #");
@@ -95,7 +91,7 @@ namespace iGear_Export
             catch (Exception e)
             {
                 //write error log, then return false
-                EventLog.WriteEntry(sSource, e.Message, EventLogEntryType.Error, 234);
+                EventLog.WriteEntry(sSource, e.Message, EventLogEntryType.Error, 201);
                 sqlConnection1.Close();
                 return false;
             }

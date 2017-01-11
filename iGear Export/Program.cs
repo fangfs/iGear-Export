@@ -52,13 +52,14 @@ namespace iGear_Export
 
             try
             {
-
+                //R1276932 - MSW - 11th Jan 2017
+                //workorderhistory changed from workorder
                    string CommandText = " select a_ProductionDate, b.supplierpart MAT_NUM, '' OLD_MAT_REF, '3602' PLANT, 'SOEM' SLOC,'A' BATCH_NUM, " +
                         "a.serialnumber HU_NUM, c.PartSerialNumber SERIAL, c.scantimestamp , d.Number 'WO #' " +
                         "from pallet a " +
                         "inner join PartDefinition b on a.PartDefinition_ID = b.ID " +
                         "inner join PalletDetail c on a.id = c.Pallet_ID " +
-                        "inner join WorkOrder d on a.WorkOrderHistory_ID = d.ID " +
+                        "inner join WorkOrderHistory d on a.WorkOrderHistory_ID = d.ID " +
                         "where Status_ID = 1 " +
                         "and c.scantimestamp > '" + dteStart.ToString("yyyy-MM-dd HH:mm:ss") + "' and c.scantimestamp <= '" + dteStop.ToString("yyyy-MM-dd HH:mm:ss") + "' " +
                         "order by c.ScanTimestamp";

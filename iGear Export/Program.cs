@@ -80,7 +80,8 @@ namespace iGear_Export
                             //write to data file
                             //streamwrite the output to a timestamped file
                             sw.WriteLine(reader["a_ProductionDate"] + "\t" + reader["MAT_NUM"] + "\t" + reader["OLD_MAT_REF"] + "\t" + reader["PLANT"] + "\t" + reader["SLOC"] + "\t" +
-                            reader["BATCH_NUM"] + "\t" + reader["HU_NUM"] + "\t" + reader["SERIAL"] + "\t" + reader["scantimestamp"] + "\t" + reader["WO #"]);
+                            reader["BATCH_NUM"] + "\t" + reader["HU_NUM"] + "\t" + reader["SERIAL"].ToString() + "\t" + reader["scantimestamp"] + "\t" + reader["WO #"]);
+                            //changed serial field to be string - removes trailing .zeros
                         }
                     }
 

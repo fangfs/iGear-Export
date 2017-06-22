@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -27,7 +22,7 @@ namespace iGear_Export
                 EventLog.CreateEventSource(sSource, sLog);
 
             //in order - first set the uninteresting to 2
-            Boolean actTest = exTract();
+            Boolean actTest = ExTract();
 
             if (actTest == true)
             {
@@ -37,7 +32,7 @@ namespace iGear_Export
 
         }
 
-        static Boolean exTract()
+        static Boolean ExTract()
         {
             //take the date and time - and do it for the previous hour
             //DateTime dteStart = DateTime.Now.AddHours(Properties.Settings.Default.intHours*-1);

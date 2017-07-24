@@ -49,33 +49,38 @@ namespace iGear_Export
             {
                 //R1276932 - MSW - 11th Jan 2017
                 //workorderhistory changed from workorder
-                   string CommandText = " select a_ProductionDate, b.supplierpart MAT_NUM, '' OLD_MAT_REF, '3602' PLANT, 'SOEM' SLOC,'A' BATCH_NUM, " +
-                        "a.serialnumber HU_NUM, c.PartSerialNumber SERIAL, c.scantimestamp , d.Number 'WO #' " +
-                        "from pallet a " +
-                        "inner join PartDefinition b on a.PartDefinition_ID = b.ID " +
-                        "inner join PalletDetail c on a.id = c.Pallet_ID " +
-                        "inner join WorkOrderHistory d on a.WorkOrderHistory_ID = d.ID " +
-                        "where Status_ID = 1 " +
-                        "and c.scantimestamp > '" + dteStart.ToString("yyyy-MM-dd HH:mm:ss") + "' and c.scantimestamp <= '" + dteStop.ToString("yyyy-MM-dd HH:mm:ss") + "' " +
-                        "order by c.ScanTimestamp";
+                //R13591319 - MSW - 24th July 2017
+                //added link to asset table, include asset description in select ---  \\traukbirmfs01\all\iGear\
+                string CommandText = "SELECT a_ProductionDate, b.supplierpart MAT_NUM, '' OLD_MAT_REF, '3602' PLANT, 'SOEM' SLOC,'A' BATCH_NUM, " +
+                     "a.serialnumber HU_NUM, c.PartSerialNumber SERIAL, c.scantimestamp, d.Number 'WO #', e.Description 'WRKCTR' " +
+                     "FROM Pallet a " +
+                     "INNER JOIN PartDefinition b ON a.PartDefinition_ID = b.ID " +
+                     "INNER JOIN PalletDetail c ON a.id = c.Pallet_ID " +
+                     "INNER JOIN WorkOrderHistory d ON a.WorkOrderHistory_ID = d.ID " +
+                     "INNER JOIN Asset e ON a.Asset_ID = e.ID " +
+                     "WHERE Status_ID = 1 " +
+                     "AND c.scantimestamp > '" + dteStart.ToString("yyyy-MM-dd HH:mm:ss") + "' AND c.scantimestamp <= '" + dteStop.ToString("yyyy-MM-dd HH:mm:ss") + "' " +
+                     "ORDER BY c.ScanTimestamp";
 
                 //run the command
                 SqlDataReader reader;
                 reader = new SqlCommand(CommandText, sqlConnection1).ExecuteReader();
 
-                if(reader.HasRows)
+                if (reader.HasRows)
                 {
                     string streamFile = dteStart.ToString("yyyyMMdd");
                     using (StreamWriter sw = new StreamWriter(Properties.Settings.Default.streamPath + filename + streamFile + ".txt"))
                     {
                         //write header
-                        sw.WriteLine("Production Date\tMAT_NUM\tOLD_MAT_REF\tPLANT\tSLOC\tBATCH_NUM\tHU_NUM\tSERIAL\tscantimestamp\tWO #");
+                        sw.WriteLine("Production Date\tMAT_NUM\tOLD_MAT_REF\tPLANT\tSLOC\tBATCH_NUM\tHU_NUM\tSERIAL\tscantimestamp\tWO #\tWork Centre");
                         while (reader.Read())
                         {
                             //write to data file
                             //streamwrite the output to a timestamped file
+                            //R1359319 - MSW - 24th July 2017
+                            //include asset description in output file
                             sw.WriteLine(reader["a_ProductionDate"] + "\t" + reader["MAT_NUM"] + "\t" + reader["OLD_MAT_REF"] + "\t" + reader["PLANT"] + "\t" + reader["SLOC"] + "\t" +
-                            reader["BATCH_NUM"] + "\t" + reader["HU_NUM"] + "\t" + reader["SERIAL"].ToString() + "\t" + reader["scantimestamp"] + "\t" + reader["WO #"]);
+                            reader["BATCH_NUM"] + "\t" + reader["HU_NUM"] + "\t" + reader["SERIAL"].ToString() + "\t" + reader["scantimestamp"] + "\t" + reader["WO #"] + "\t" + reader["WRKCTR"]);
                             //changed serial field to be string - removes trailing .zeros
                         }
                     }

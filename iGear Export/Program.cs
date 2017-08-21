@@ -68,7 +68,7 @@ namespace iGear_Export
 
                 if (reader.HasRows)
                 {
-                    string streamFile = dteStart.ToString("yyyyMMdd");
+                    string streamFile = dteStart.ToString("yyyyMMddHHmmss");
                     using (StreamWriter sw = new StreamWriter(Properties.Settings.Default.streamPath + filename + streamFile + ".txt"))
                     {
                         //write header

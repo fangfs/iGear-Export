@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iGear Export", "iGear Export\iGear Export.csproj", "{AAB2906E-ABBF-4C8D-BCEF-BA562F5658AA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{1A12AC80-F5AA-4589-98D3-469A5B1E48B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,13 @@ Global
 		{AAB2906E-ABBF-4C8D-BCEF-BA562F5658AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAB2906E-ABBF-4C8D-BCEF-BA562F5658AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAB2906E-ABBF-4C8D-BCEF-BA562F5658AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A12AC80-F5AA-4589-98D3-469A5B1E48B5}.Debug|Any CPU.ActiveCfg = Debug
+		{1A12AC80-F5AA-4589-98D3-469A5B1E48B5}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6E46E07-E10A-4658-B709-2055046D554A}
 	EndGlobalSection
 EndGlobal
